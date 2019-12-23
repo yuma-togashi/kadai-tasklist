@@ -1,0 +1,62 @@
+[33mcommit fbed2c9c82891b670ecaa62384464d6760b521cd[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mheroku/master[m[33m)[m
+Author: togashi.yuma <calendar4830@gmail.com>
+Date:   Sat Dec 21 03:02:14 2019 +0000
+
+    for heroku
+
+[1mdiff --git a/Gemfile b/Gemfile[m
+[1mindex 6589b26..73a426c 100644[m
+[1m--- a/Gemfile[m
+[1m+++ b/Gemfile[m
+[36m@@ -53,4 +53,9 @@[m [mend[m
+ [m
+ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem[m
+ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby][m
+[31m-gem 'kaminari'[m
+\ No newline at end of file[m
+[32m+[m[32mgem 'kaminari'[m
+[32m+[m
+[32m+[m[32mgroup :production do[m
+[32m+[m[32m  gem 'pg', '>= 0.18', '< 2.0'[m
+[32m+[m[32mend[m
+[41m+[m
+[1mdiff --git a/Gemfile.lock b/Gemfile.lock[m
+[1mindex 5f5f60a..b4f6394 100644[m
+[1m--- a/Gemfile.lock[m
+[1m+++ b/Gemfile.lock[m
+[36m@@ -99,6 +99,7 @@[m [mGEM[m
+     nio4r (2.5.2)[m
+     nokogiri (1.10.7)[m
+       mini_portile2 (~> 2.4.0)[m
+[32m+[m[32m    pg (1.1.4)[m
+     puma (3.12.2)[m
+     rack (2.0.7)[m
+     rack-test (1.1.0)[m
+[36m@@ -184,6 +185,7 @@[m [mDEPENDENCIES[m
+   kaminari[m
+   listen (>= 3.0.5, < 3.2)[m
+   mysql2 (>= 0.4.4, < 0.6.0)[m
+[32m+[m[32m  pg (>= 0.18, < 2.0)[m
+   puma (~> 3.11)[m
+   rails (~> 5.2.2)[m
+   sass-rails (~> 5.0)[m
+[1mdiff --git a/config/database.yml b/config/database.yml[m
+[1mindex 9918f0d..fb3a6f0 100644[m
+[1m--- a/config/database.yml[m
+[1m+++ b/config/database.yml[m
+[36m@@ -48,7 +48,10 @@[m [mtest:[m
+ #     url: <%= ENV['DATABASE_URL'] %>[m
+ #[m
+ production:[m
+[31m-  <<: *default[m
+[31m-  database: tasklist_production[m
+[31m-  username: tasklist[m
+[31m-  password: <%= ENV['TASKLIST_DATABASE_PASSWORD'] %>[m
+[32m+[m[32m  adapter: postgresql[m
+[32m+[m[32m  encoding: unicode[m
+[32m+[m[32m  pool: 5[m
+[32m+[m[32m  database: message-board_production[m
+[32m+[m[32m  username: message-board[m
+[32m+[m[32m  password: <%= ENV['MESSAGE-BOARD_DATABASE_PASSWORD'] %>[m
+[41m+  [m
+\ No newline at end of file[m
