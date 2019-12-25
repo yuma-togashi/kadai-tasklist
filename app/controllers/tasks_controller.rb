@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
       @tasks = Task.all
+      
   end
 
   def show
@@ -13,13 +14,11 @@ class TasksController < ApplicationController
   end
 
   def create
-      @task = Task.new(task_params)
-
+    @task = current_user.tasks.build(task_params)
+    #@task = Task.new(title: params[:task][:title], content: params[:task][:content])
     if @task.save
-      flash[:success] = 'Task が正常に投稿されました'
-      redirect_to @task
+      redirect_to tasks_url
     else
-      flash.now[:danger] = 'Task が投稿されませんでした'
       render :new
     end
   end
